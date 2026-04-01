@@ -4,319 +4,175 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ETRAAM | Maison de Parfum</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #b38f36;
             --black: #121212;
-            --white: #ffffff;
             --beige: #faf9f6;
+            --white: #ffffff;
         }
 
-        body {
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            background-color: var(--beige);
-            color: var(--black);
-        }
+        body { font-family: 'Montserrat', sans-serif; margin: 0; background: var(--beige); color: var(--black); line-height: 1.6; }
 
         /* --- NAVIGATION --- */
-        nav {
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--white);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
+        nav { padding: 20px 40px; background: var(--white); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+        .logo { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 700; letter-spacing: 5px; }
+        .bag-count { background: var(--black); color: white; padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
 
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 700;
-            letter-spacing: 4px;
-        }
+        /* --- HERO --- */
+        .hero { height: 40vh; background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&q=80&w=1000') center/cover; display: flex; align-items: center; justify-content: center; color: white; text-align: center; }
+        .hero h2 { font-family: 'Cormorant Garamond', serif; font-size: 50px; margin: 0; letter-spacing: 3px; }
 
-        .cart-icon {
-            cursor: pointer;
-            position: relative;
-            font-size: 18px;
-        }
-
-        .cart-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--gold);
-            color: white;
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 50%;
-        }
-
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 60vh;
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://i.imgur.com/8QO9yR7.jpeg') no-repeat center center;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-        }
-
-        .hero h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        /* --- CATEGORIES --- */
-        .filters {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 30px;
-            overflow-x: auto;
-        }
-
-        .filter-btn {
-            padding: 8px 20px;
-            border: 1px solid #ddd;
-            background: white;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 12px;
-            transition: 0.3s;
-        }
-
-        .filter-btn.active {
-            background: var(--black);
-            color: white;
-            border-color: var(--black);
-        }
+        /* --- FILTERS --- */
+        .filter-wrap { display: flex; justify-content: center; gap: 15px; padding: 40px 20px; flex-wrap: wrap; }
+        .filter-btn { padding: 10px 25px; border: 1px solid #ddd; background: white; border-radius: 2px; cursor: pointer; transition: 0.3s; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; }
+        .filter-btn.active { background: var(--black); color: white; border-color: var(--black); }
 
         /* --- PRODUCT GRID --- */
-        .shop-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 0 40px 40px;
-        }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 0 40px 60px; }
+        .card { background: white; padding: 15px; transition: 0.5s; border-bottom: 3px solid transparent; }
+        .card:hover { transform: translateY(-10px); border-bottom: 3px solid var(--gold); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
+        
+        .img-box { width: 100%; height: 320px; background: #f3f3f3; overflow: hidden; margin-bottom: 20px; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card:hover img { transform: scale(1.1); }
 
-        .product-card {
-            background: white;
-            padding: 20px;
-            border-radius: 4px;
-            transition: 0.4s;
-            position: relative;
-        }
+        .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin: 10px 0; font-weight: 700; }
+        .card .category { font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; font-weight: 700; }
+        .card .price { font-weight: 400; margin-bottom: 20px; font-size: 18px; color: #555; }
+        
+        .buy-btn { width: 100%; padding: 15px; background: var(--black); color: white; border: none; cursor: pointer; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
 
-        .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
-        }
+        /* --- PROFESSIONAL FOOTER --- */
+        footer { background: #1a1a1a; color: #888; padding: 80px 40px 40px; text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 60px; text-align: left; }
+        .footer-col h4 { color: white; font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 20px; }
+        .footer-col p { font-size: 13px; margin: 8px 0; }
+        
+        .curated-by { border-top: 1px solid #333; padding-top: 40px; font-size: 12px; letter-spacing: 3px; color: #fff; text-transform: uppercase; }
+        .curated-by span { color: var(--gold); font-weight: 700; }
 
-        .tag {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: var(--gold);
-            color: white;
-            font-size: 10px;
-            padding: 4px 10px;
-            text-transform: uppercase;
-        }
-
-        .product-card h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 24px;
-            margin: 15px 0 5px;
-        }
-
-        .product-card .desc {
-            font-size: 12px;
-            color: #777;
-            margin-bottom: 15px;
-        }
-
-        .product-card .price {
-            font-weight: 600;
-            color: var(--gold);
-            font-size: 20px;
-        }
-
-        .add-to-cart {
-            margin-top: 15px;
-            width: 100%;
-            padding: 12px;
-            background: var(--black);
-            color: white;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 11px;
-        }
-
-        /* --- CART SIDEBAR --- */
-        .cart-sidebar {
-            position: fixed;
-            right: -400px;
-            top: 0;
-            width: 350px;
-            height: 100%;
-            background: white;
-            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-            transition: 0.5s;
-            z-index: 2000;
-            padding: 40px;
-            box-sizing: border-box;
-        }
-
-        .cart-sidebar.open { right: 0; }
-
-        .close-cart { cursor: pointer; font-size: 24px; margin-bottom: 30px; }
-
-        .cart-items { height: 60%; overflow-y: auto; }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        .checkout-btn {
-            width: 100%;
-            padding: 18px;
-            background: #25D366;
-            color: white;
-            border: none;
-            font-weight: 600;
-            margin-top: 20px;
-            cursor: pointer;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .logo { font-size: 24px; }
-            .shop-container { padding: 20px; }
-            .cart-sidebar { width: 100%; right: -100%; }
-        }
+        /* Floating Order Button */
+        .order-bar { position: fixed; bottom: 20px; right: 20px; background: #25D366; color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; box-shadow: 0 10px 20px rgba(0,0,0,0.2); z-index: 1000; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">ETRAAM</div>
-        <div class="cart-icon" onclick="toggleCart()">
-            BAG <span class="cart-badge" id="count">0</span>
-        </div>
+        <div class="bag-count">BAG: <span id="cart-count">0</span></div>
     </nav>
 
     <div class="hero">
-        <h2>Essence of Luxury</h2>
-        <p>Buy 1 Get 1 Free on Signature Collections</p>
+        <h2>Curated Collection</h2>
     </div>
 
-    <div class="filters">
-        <button class="filter-btn active">All</button>
-        <button class="filter-btn">Oud</button>
-        <button class="filter-btn">Floral</button>
-        <button class="filter-btn">Musk</button>
+    <div class="filter-wrap">
+        <button class="filter-btn active" onclick="filterItems('all', event)">All</button>
+        <button class="filter-btn" onclick="filterItems('mens', event)">Mens</button>
+        <button class="filter-btn" onclick="filterItems('womens', event)">Womens</button>
+        <button class="filter-btn" onclick="filterItems('unisex', event)">Unisex</button>
+        <button class="filter-btn" onclick="filterItems('luxury', event)">Luxury</button>
     </div>
 
-    <div class="shop-container" id="product-grid">
-        <div class="product-card">
-            <div class="tag">Bestseller</div>
-            <h3>Mughal Oud</h3>
-            <p class="desc">Deep, Smokey, Agarwood</p>
-            <div class="price">₹2,000</div>
-            <button class="add-to-cart" onclick="addToCart('Mughal Oud', 2000)">Add to Bag</button>
+    <div class="grid" id="product-grid">
         </div>
 
-        <div class="product-card">
-            <div class="tag">Offer</div>
-            <h3>Kannauj Gulab</h3>
-            <p class="desc">Pure Steam-Distilled Rose</p>
-            <div class="price">₹1,000</div>
-            <button class="add-to-cart" onclick="addToCart('Kannauj Gulab', 1000)">Add to Bag</button>
-        </div>
-
-        <div class="product-card">
-            <h3>Drape Special</h3>
-            <p class="desc">Amber & Velvet Musk Blend</p>
-            <div class="price">₹500</div>
-            <button class="add-to-cart" onclick="addToCart('Drape Special', 500)">Add to Bag</button>
-        </div>
-    </div>
-
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="close-cart" onclick="toggleCart()">×</div>
-        <h2 style="font-family: 'Cormorant Garamond', serif;">Your Selection</h2>
-        <div class="cart-items" id="cartItems">
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>VISIT US</h4>
+                <p>Naveen Market, Kanpur</p>
+                <p>Uttar Pradesh, India</p>
             </div>
-        <div class="total-box">
-            <h4 style="display: flex; justify-content: space-between;">Total: <span id="totalPrice">₹0</span></h4>
-            <button class="checkout-btn" onclick="checkout()">ORDER ON WHATSAPP</button>
+            <div class="footer-col">
+                <h4>CONTACT</h4>
+                <p>Phone: +91 7054157666</p>
+                <p>Email: info@etraam.com</p>
+            </div>
+            <div class="footer-col">
+                <h4>HOURS</h4>
+                <p>Mon - Sat: 11:00 AM - 9:00 PM</p>
+                <p>Sunday: Closed</p>
+            </div>
         </div>
-    </div>
+        <div class="curated-by">Curated by <span>Swastik Sharma</span></div>
+        <p style="font-size: 10px; margin-top: 20px;">© 2026 ETRAAM Perfumes. All Rights Reserved.</p>
+    </footer>
 
-    <script>
-        let cart = [];
-        let total = 0;
+    <a href="#" class="order-bar" onclick="sendWhatsApp()">CONFIRM ORDER (₹<span id="total-val">0</span>)</a>
 
-        function toggleCart() {
-            document.getElementById('cartSidebar').classList.toggle('open');
-        }
+<script>
+    const products = [
+        // MENS
+        { name: "Etraam Men", cat: "mens", price: 1500, img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=500" },
+        { name: "Etraam White Oud", cat: "mens", price: 2500, img: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=500" },
+        { name: "Etraam Classical", cat: "mens", price: 1800, img: "https://images.unsplash.com/photo-1585120040315-2241b774ad0f?w=500" },
+        // WOMENS
+        { name: "Etraam Womens", cat: "womens", price: 1500, img: "https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500" },
+        { name: "Noor-e-Ishq", cat: "womens", price: 2200, img: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500" },
+        { name: "Etraam Feminism", cat: "womens", price: 2000, img: "https://images.unsplash.com/photo-1512781577229-c840dc339843?w=500" },
+        // UNISEX
+        { name: "Mehfooz-e-Ishq", cat: "unisex", price: 2800, img: "https://images.unsplash.com/photo-1590736704728-f4730bb30770?w=500" },
+        { name: "Etraam Adab", cat: "unisex", price: 2100, img: "https://images.unsplash.com/photo-1615485240388-14819783719e?w=500" },
+        // LUXURY
+        { name: "Darbaab Collection", cat: "luxury", price: 5500, img: "https://images.unsplash.com/photo-1557170334-a9632e77c6e4?w=500" },
+        { name: "Etraam Ishq", cat: "luxury", price: 4500, img: "https://images.unsplash.com/photo-1616948055599-82090c74f115?w=500" }
+    ];
 
-        function addToCart(name, price) {
-            cart.push({name, price});
-            total += price;
-            updateUI();
-            
-            // लग्जरी एहसास के लिए: सामान जोड़ते ही कार्ट खुल जाएगा
-            if(!document.getElementById('cartSidebar').classList.contains('open')){
-                toggleCart();
-            }
-        }
+    let cart = [];
+    let total = 0;
 
-        function updateUI() {
-            document.getElementById('count').innerText = cart.length;
-            document.getElementById('totalPrice').innerText = "₹" + total;
-            
-            const cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = '';
-            
-            cart.forEach((item, index) => {
-                cartItemsContainer.innerHTML += `
-                    <div class="cart-item">
-                        <span>${item.name}</span>
-                        <span>₹${item.price}</span>
-                    </div>
-                `;
-            });
-        }
+    function renderItems(filter = 'all') {
+        const grid = document.getElementById('product-grid');
+        grid.innerHTML = '';
+        const filtered = filter === 'all' ? products : products.filter(p => p.cat === filter);
 
-        function checkout() {
-            if(cart.length === 0) return alert("Bag is empty!");
-            
-            let message = "ETRAAM LUXURY ORDER:%0A";
-            cart.forEach((item, i) => message += `${i+1}. ${item.name}%0A`);
-            message += `%0ATotal: ₹${total}`;
-            
-            window.open(`https://wa.me/917054157666?text=${message}`, '_blank');
-        }
-    </script>
+        filtered.forEach(p => {
+            grid.innerHTML += `
+                <div class="card">
+                    <div class="img-box"><img src="${p.img}" alt="${p.name}"></div>
+                    <span class="category">${p.cat}</span>
+                    <h3>${p.name}</h3>
+                    <div class="price">₹${p.price.toLocaleString()}</div>
+                    <button class="buy-btn" onclick="addToBag('${p.name}', ${p.price})">Add to Bag</button>
+                </div>
+            `;
+        });
+    }
+
+    function filterItems(cat, e) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderItems(cat);
+    }
+
+    function addToBag(name, price) {
+        cart.push(name);
+        total += price;
+        document.getElementById('cart-count').innerText = cart.length;
+        document.getElementById('total-val').innerText = total.toLocaleString();
+    }
+
+    function sendWhatsApp() {
+        if(cart.length === 0) return alert("Please add something to your bag first!");
+        let text = `*New Order from ETRAAM*%0A%0AItems:%0A- ${cart.join('%0A- ')}%0A%0A*Grand Total: ₹${total}*%0A%0ACurated for me by Swastik Sharma.`;
+        window.open(`https://wa.me/917054157666?text=${text}`, '_blank');
+    }
+
+    renderItems();
+</script>
 </body>
 </html>
           
+       
 
-         
+        
+       
+
+      
+            
+      
+     
+      
